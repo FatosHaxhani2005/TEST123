@@ -1,1 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkbox Form</title>
+    <script>
+        function shuffleValues() {
+            var checkboxesContainer = document.getElementById('checkboxes-container');
+            var checkboxes = checkboxesContainer.getElementsByTagName('input');
+            var checkboxArray = Array.from(checkboxes);
+            checkboxArray.sort(function() {
+                return 0.5 - Math.random();
+            });
+            checkboxArray.forEach(function(checkbox) {
+                checkboxesContainer.appendChild(checkbox);
+            });
+        }
 
+        function changeValues() {
+            var checkboxes = document.getElementsByName('checkbox');
+            var newValues = ['Career', 'Employment', 'Pabau', 'Internship'];
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].value = newValues[i];
+            }
+        }
+
+        function showSelectedValues() {
+            var checkboxes = document.getElementsByName('checkbox');
+            var selectedValues = [];
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    selectedValues.push(checkboxes[i].value);
+                }
+            }
+            var resultDiv = document.getElementById('result');
+            resultDiv.innerText = 'Selected values: ' + selectedValues.join(', ');
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <div id="checkboxes-container">
+            <input type="checkbox" name="checkbox" value="Internship"> Internship<br>
+            <input type="checkbox" name="checkbox" value="Pabau"> Pabau<br>
+            <input type="checkbox" name="checkbox" value="Employment"> Employment<br>
+            <input type="checkbox" name="checkbox" value="Career"> Career<br><br>
+        </div>
+        <button type="button" onclick="shuffleValues()">Shuffle Values</button>
+        <button type="button" onclick="changeValues()">Change Values</button>
+        <button type="button" onclick="showSelectedValues()">Show Selected Values</button>
+        <div id="result"></div>
+    </form>
+</body>
+</html>
